@@ -7,9 +7,10 @@ import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
 
-class Seccion1introduccionTema2introduccionTest {
+public class Seccion1IntroduccionTema2IntroduccionTest {
 
     @Test
     void main() {
