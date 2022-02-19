@@ -19,14 +19,14 @@ class Seccion1introduccionTema2introduccionTest {
         // segun la longitud de MAYOR a MENOR (es decir, al contrario que el ejemplo de
         // la presentacion.
         // * solo debes modificar la siguiente linea, el resto de codigo debe quedar igual *
-        Comparator<String> comparadorLongitud = null;
+        Comparator<String> comparadorLongitud = ((o1, o2) -> o2.length() - o1.length());
 
         assertNotNull(comparadorLongitud);
 
         Collections.sort(nombres,comparadorLongitud);
 
-        assertEquals("El primer elemento deberia ser Antonia", "Antonia", nombres.get(0));
-        assertEquals("El segundo elemnento deberia ser Pedro", "Pedro", nombres.get(1));
-        assertEquals("El tercer elemento debeia ser Juan", "Juan", nombres.get(2));
+        assertEquals("Antonia", nombres.get(0), "El primer elemento deberia ser Antonia");
+        assertEquals("Pedro", nombres.get(1), "El segundo elemnento deberia ser Pedro");
+        assertEquals("Juan", nombres.get(2), "El tercer elemento debeia ser Juan");
     }
 }
