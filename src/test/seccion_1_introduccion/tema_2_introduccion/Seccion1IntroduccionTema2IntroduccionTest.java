@@ -1,4 +1,4 @@
-package test.seccion_1_introduccion.tema_2_introduccion;
+package seccion_1_introduccion.tema_2_introduccion;
 
 import org.junit.jupiter.api.Test;
 

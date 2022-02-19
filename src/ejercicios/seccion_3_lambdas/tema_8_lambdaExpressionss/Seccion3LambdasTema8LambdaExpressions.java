@@ -1,5 +1,7 @@
 package seccion_3_lambdas.tema_8_lambdaExpressionss;
 
+import java.util.Arrays;
+
 /**
  * El ejercicio consiste en implementar los metodos de tal forma que
  * devuelvan una lambda expression que implementen la interface declarada
@@ -23,12 +25,12 @@ public class Seccion3LambdasTema8LambdaExpressions {
 
     /** Devuelve una implemtacion de constante que siempre devuelve 5 */
     public Constante devuelve5() {
-        return null;
+        return () -> 5;
     }
 
     /** Devuelve una implementacion de Operador con el metodo de suma de dos enteros */
     public Operador obtenSumador() {
-        return null;
+        return Integer::sum;
     }
 
     /**
@@ -38,7 +40,13 @@ public class Seccion3LambdasTema8LambdaExpressions {
      * segundo parametro del metodo incializa
      */
     public InicializadorArrays obtenInicializador() {
-        return null;
+        /*return (array, valor) -> {
+            for(int i = 0; i < valor.length(); i++) {
+                array[i] = valor;
+            }
+        };*/
+
+        return (Arrays::fill);
     }
 }
 
@@ -47,9 +55,9 @@ interface Constante {
 }
 
 interface Operador {
-    int opera ( int a, int b);
+    int opera(int a, int b);
 }
 
 interface InicializadorArrays {
-    void inicializa ( String[] array, String valor)  ;
+    void inicializa(String[] array, String valor);
 }

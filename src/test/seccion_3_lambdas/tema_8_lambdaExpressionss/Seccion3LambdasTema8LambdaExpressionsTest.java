@@ -1,7 +1,7 @@
-package test.seccion_3_lambdas.tema_8_lambdaExpressionss;
+package seccion_3_lambdas.tema_8_lambdaExpressionss;
 
 import org.junit.jupiter.api.Test;
-import seccion_3_lambdas.tema_8_lambdaExpressionss.Seccion3LambdasTema8LambdaExpressions;
+import static org.junit.jupiter.api.Assertions.*;
 
 import static org.junit.jupiter.api.Assertions.assertArrayEquals;
 import static org.junit.jupiter.api.Assertions.assertEquals;
