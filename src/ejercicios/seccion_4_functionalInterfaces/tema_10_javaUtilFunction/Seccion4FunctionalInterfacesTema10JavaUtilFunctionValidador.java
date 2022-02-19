@@ -2,6 +2,7 @@ package seccion_4_functionalInterfaces.tema_10_javaUtilFunction;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.function.Predicate;
 
 /**
  * El objetivo de esta clase es validar que objetos del tipo T cumplen unos determinados requisitos.
@@ -20,12 +21,18 @@ import java.util.List;
  */
 public class Seccion4FunctionalInterfacesTema10JavaUtilFunctionValidador<T> {
     // falta indicar el tipo de List
-    List validadores = new ArrayList<>();
+    List<Predicate<T>> validadores = new ArrayList<>();
 
-    public boolean valida(Object valor) { // cambiar Object por el tipo adecuado
+    public boolean valida(T valor) { // cambiar Object por el tipo adecuado
         // true si pasa todos los validadores, falso si no
+        for(Predicate<T> validador : validadores) {
+            if (!validador.test(valor)) return false;
+        }
+
         return true;
     }
 
-    // falta un metodo add que admite nuevas validaciones
+    public void add(Predicate<T> validador) {
+        validadores.add(validador);
+    }
 }

@@ -1,9 +1,9 @@
 package seccion_4_functionalInterfaces.tema_10_javaUtilFunction;
 
 import org.junit.jupiter.api.Test;
+import org.junit.platform.commons.util.StringUtils;
 
-import java.util.function.IntUnaryOperator;
-import java.util.function.LongBinaryOperator;
+import java.util.function.*;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -15,7 +15,7 @@ class Seccion4FunctionalInterfacesTema10JavaUtilFunctionPersonaTest {
 
     @Test
     public void test_function() {
-        IntUnaryOperator cuadrado = null;
+        IntUnaryOperator cuadrado = a -> a * a;
 
         assertEquals(0, cuadrado.applyAsInt(0));
         assertEquals(1, cuadrado.applyAsInt(1));
@@ -29,7 +29,8 @@ class Seccion4FunctionalInterfacesTema10JavaUtilFunctionPersonaTest {
      */
     @Test
     public void test_funcion_2() {
-        LongBinaryOperator menor = null;
+        //LongBinaryOperator menor = (a, b) -> a < b ? a : b;
+        LongBinaryOperator menor = Math::min;
 
         assertEquals(-2, menor.applyAsLong(-2, 3));
         assertEquals(5, menor.applyAsLong(10, 5));
@@ -53,12 +54,30 @@ class Seccion4FunctionalInterfacesTema10JavaUtilFunctionPersonaTest {
         Seccion4FunctionalInterfacesTema10JavaUtilFunctionPersona personaNoPariente = new Seccion4FunctionalInterfacesTema10JavaUtilFunctionPersona ("nombre","otro","otro");
 
         // Cread una funcion que indique si el segundo apellido de una persona es null
+        Predicate<Seccion4FunctionalInterfacesTema10JavaUtilFunctionPersona> segundoApellidoNull = p -> StringUtils.isBlank(p.getApellido2());
+        assertTrue(segundoApellidoNull.test(personaSinSegundoApellido));
+        assertFalse(segundoApellidoNull.test(personaConSegundoApellido));
 
         // Una funcion que nos diga si dos personas son parientes: para nosotros parientes
         // son personas con el mismo primer apellido
+        BiPredicate<Seccion4FunctionalInterfacesTema10JavaUtilFunctionPersona, Seccion4FunctionalInterfacesTema10JavaUtilFunctionPersona> sonParientes = (p1, p2) -> p1.getApellido1().equals(p2.getApellido1());
+        assertTrue(sonParientes.test(personaSinSegundoApellido, personaConSegundoApellido));
+        assertFalse(sonParientes.test(personaSinSegundoApellido, personaNoPariente));
 
         // Una funcion que "enmascare" los datos de una persona: debe permutar los valores de sus
         // y nombre
+        Consumer<Seccion4FunctionalInterfacesTema10JavaUtilFunctionPersona> enmascarar = p -> {
+            String aux = p.getApellido1();
+            p.setApellido1(p.getApellido2());
+            p.setApellido2(p.getNombre());
+            p.setNombre(aux);
+        };
+
+        enmascarar.accept(personaConSegundoApellido);
+
+        assertEquals("apellido1", personaConSegundoApellido.getNombre());
+        assertEquals("apellido2", personaConSegundoApellido.getApellido1());
+        assertEquals("nombre", personaConSegundoApellido.getApellido2());
     }
 
     @Test
@@ -71,11 +90,12 @@ class Seccion4FunctionalInterfacesTema10JavaUtilFunctionPersonaTest {
          * Como parametro al metodo add debereis pasar una expresion que produzca el tipo de funcion que
          * hayais decidido que usa la clase Validador
          */
-        //Validador<Persona> validador = new Validador<Persona>();
+        Seccion4FunctionalInterfacesTema10JavaUtilFunctionValidador<Seccion4FunctionalInterfacesTema10JavaUtilFunctionPersona> validador
+                = new Seccion4FunctionalInterfacesTema10JavaUtilFunctionValidador<>();
 
-        //validador.add(/* pasar un predicado que mire si el primer apellido es null */ );
+        validador.add(p -> !StringUtils.isBlank(p.getApellido1()));
 
-        //assertTrue(validador.valida(new Persona("nombre","ape1","ape2")));
-        //assertFalse(validador.valida(new Persona("nombre",null,"ape2")));
+        assertTrue(validador.valida(new Seccion4FunctionalInterfacesTema10JavaUtilFunctionPersona("nombre","ape1","ape2")));
+        assertFalse(validador.valida(new Seccion4FunctionalInterfacesTema10JavaUtilFunctionPersona("nombre",null,"ape2")));
     }
 }
