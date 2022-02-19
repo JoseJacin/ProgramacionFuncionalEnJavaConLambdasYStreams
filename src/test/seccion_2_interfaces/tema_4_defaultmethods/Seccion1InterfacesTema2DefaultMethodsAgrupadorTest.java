@@ -1,8 +1,6 @@
-package test.seccion_2_interfaces.tema_4_defaultmethods;
+package seccion_2_interfaces.tema_4_defaultmethods;
 
 import org.junit.jupiter.api.Test;
-import seccion_2_interfaces.tema_4_defaultmethods.Seccion1InterfacesTema2DefaultMethodsAgrupador;
-import seccion_2_interfaces.tema_4_defaultmethods.Seccion1InterfacesTema2DefaultMethodsAgrupadorConList;
 
 import java.util.Arrays;
 

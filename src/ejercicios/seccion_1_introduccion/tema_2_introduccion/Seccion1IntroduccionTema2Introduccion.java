@@ -1,11 +1,11 @@
-package seccion_1_introduccion.tema2introduccion;
+package seccion_1_introduccion.tema_2_introduccion;
 
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
 
-public class Seccion1introduccionTema2introduccion {
+public class Seccion1IntroduccionTema2Introduccion {
 
 	public static void main (String[] args) {
 		List<String> nombres = Arrays.asList("Juan", "Antonia", "Pedro");
